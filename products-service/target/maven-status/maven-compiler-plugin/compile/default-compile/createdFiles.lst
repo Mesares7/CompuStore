@@ -1,0 +1,9 @@
+com\compustore\productsservice\controller\ProductController.class
+com\compustore\productsservice\security\JwtTokenUtil.class
+com\compustore\productsservice\security\SecurityConfig.class
+com\compustore\productsservice\config\OpenApiConfig.class
+com\compustore\productsservice\security\JwtAuthenticationFilter.class
+com\compustore\productsservice\service\ProductService.class
+com\compustore\productsservice\repository\ProductRepository.class
+com\compustore\productsservice\model\Product.class
+com\compustore\productsservice\ProductsServiceApplication.class

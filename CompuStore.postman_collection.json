@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "CompuStore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for CompuStore microservices"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{users_base_url}}/api/users/register",
+          "host": [
+            "{{users_base_url}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"secret\",\n  \"role\": \"ADMIN\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{users_base_url}}/api/users/login",
+          "host": [
+            "{{users_base_url}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"secret\"\n}"
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set(\"jwt\", jsonData.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{users_base_url}}/api/users/profile",
+          "host": [
+            "{{users_base_url}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{products_base_url}}/api/products",
+          "host": [
+            "{{products_base_url}}"
+          ],
+          "path": [
+            "api",
+            "products"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Laptop\",\n  \"description\": \"High performance laptop\",\n  \"price\": 1299.99,\n  \"quantity\": 10\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{products_base_url}}/api/products",
+          "host": [
+            "{{products_base_url}}"
+          ],
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Product By Id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{products_base_url}}/api/products/1",
+          "host": [
+            "{{products_base_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{products_base_url}}/api/products/1",
+          "host": [
+            "{{products_base_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Laptop\",\n  \"description\": \"Updated description\",\n  \"price\": 1199.99,\n  \"quantity\": 5\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{products_base_url}}/api/products/1",
+          "host": [
+            "{{products_base_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "users_base_url",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "products_base_url",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "jwt",
+      "value": ""
+    }
+  ]
+}
